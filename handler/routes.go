@@ -7,7 +7,7 @@ import (
 	"github.com/rs/cors"
 )
 
-// Routes configures a handler to route HTTP requests.  Coeus supports only a
+// Routes configures a handler to route HTTP requests.  Supports only a
 // few endpoints such as the /v1/ping health check and /v1/keys to expose the
 // public keys used to encrypt JSON web tokens.
 func Routes() http.Handler {
