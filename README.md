@@ -245,9 +245,6 @@ In our `cmd/root.go` file, we create a web server:
 The routes are configured in the `Routes()` function in `handler/routes.go`,
 using the Gorilla `mux` package (feel free to use whatever Go router you like):
 
-    // Routes configures a handler to route HTTP requests.  Supports only a
-    // few endpoints such as the /v1/ping health check and /v1/keys to expose the
-    // public keys used to encrypt JSON web tokens.
     func Routes() http.Handler {
         router := mux.NewRouter()
 
@@ -257,8 +254,17 @@ using the Gorilla `mux` package (feel free to use whatever Go router you like):
         // For load balancers, monitors, etc.
         v1.HandleFunc("/ping", Ping).Methods("GET")
 
-        // Retrieve the public keys
+        // Retrieve the JWT public keys
         v1.HandleFunc("/keys", PublicKeys).Methods("GET")
+
+        // Authenticate the user and return a JWT
+        v1.HandleFunc("/auth", Authenticate).Methods("POST")
+
+        // Update a token
+        v1.HandleFunc("/auth", UpdateToken).Methods("PUT")
+
+        // Our "API"...
+        v1.HandleFunc("/sample", Sample).Methods("GET")
 
         // Allow browsers to access the API
         c := cors.New(cors.Options{
