@@ -677,6 +677,11 @@ directly, it can be a pain to setup.  And if you're using a recognized certifica
 authority such as Comodo or Verisign, they'll have instructions to help you get
 setup using Nginx. 
 
+Some may suggest encrypting the payload.  This is not recommended.  JWT is about
+authenticating and authorizing the user.  Securing the payload should be handled
+by the SSL layer.  Otherwise your client is now doing the work of decrypting
+payloads, instead of just using what's built into the browser already (SSL).
+
 ## License
 
 This tutorial and the associated code is licensed under the Apache licence.  See 
