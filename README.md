@@ -225,6 +225,10 @@ in memory.  In a production server, you may want to have your app watch the
 keys directory and refresh the cache when new key files appear.  As it stands,
 when we generate a new key we must restart the server.
 
+Alternatively you could store the keys in a database or cache so they're 
+available across a server cluster.  That's additional work beyond the scope of
+this tutorial.
+
 In our `cmd/root.go` file, we create a web server:
 
     // Setup an HTTP server
