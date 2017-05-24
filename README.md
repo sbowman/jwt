@@ -702,3 +702,6 @@ LICENSE for more info.
 This tutorial and software is offered as-is.  While I have endeavored to make
 this information accurate and current, I make no guarantees that the code is 
 100% secure or bug-free.
+
+If I've missed anything or done something wrong, please post a ticket to this
+repository.
