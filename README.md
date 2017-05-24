@@ -142,20 +142,20 @@ for the complete code.
 
 First, use the Go RSA package to generate a 2048-bit public/private key:
 
-        pk, err := rsa.GenerateKey(rand.Reader, 2048)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Unable to generate RSA keys: %s\n", err)
-			os.Exit(1)
-		}
+    pk, err := rsa.GenerateKey(rand.Reader, 2048)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Unable to generate RSA keys: %s\n", err)
+        os.Exit(1)
+    }
 
 Create a directory to store the keys in, if it doesn't already exist:
 
-		directory := viper.GetString("jwt.keys")
+    directory := viper.GetString("jwt.keys")
 
-		if err = os.MkdirAll(directory, 0700); err != nil {
-			fmt.Fprintf(os.Stderr, "Unable to create directory %s: %s\n", directory, err)
-			os.Exit(1)
-		}
+    if err = os.MkdirAll(directory, 0700); err != nil {
+        fmt.Fprintf(os.Stderr, "Unable to create directory %s: %s\n", directory, err)
+        os.Exit(1)
+    }
 
 We need a unique identifier for the keys.  This will be included in the JWT
 header as the key ID, i.e. _kid_.  It will also be published in a JSON object 
@@ -165,18 +165,18 @@ the tokens are timestamped; this makes it easier to expire old IDs (if you're
 worried about exposing your MAC address, run from a container or VM with a 
 random MAC address):
 
-		// We need these to be ordered...
-		id := uuid.NewV1().String()
+    // We need these to be ordered...
+    id := uuid.NewV1().String()
 
 Export the keys as X509 certificates, so we can write them to disk.  We'll use
 the key ID as the filename: 
 
-		der := x509.MarshalPKCS1PrivateKey(pk)
-		file := filepath.Join(directory, id+".key")
-		if err = ioutil.WriteFile(file, der, 0600); err != nil {
-			fmt.Fprintf(os.Stderr, "Unable to save key to %s: %s\n", file, err)
-			os.Exit(1)
-		}
+    der := x509.MarshalPKCS1PrivateKey(pk)
+    file := filepath.Join(directory, id+".key")
+    if err = ioutil.WriteFile(file, der, 0600); err != nil {
+        fmt.Fprintf(os.Stderr, "Unable to save key to %s: %s\n", file, err)
+        os.Exit(1)
+    }
 
 ### Step 2: Setup a Web Server and Expose the Public Keys
 
