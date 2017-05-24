@@ -679,8 +679,8 @@ setup using Nginx.
 
 ## License
 
-This tutorial and the associated code is licensed under the Apache licence.  
-See LICENSE for more info.
+This tutorial and the associated code is licensed under the Apache licence.  See 
+LICENSE for more info.
 
 ## Support
 
